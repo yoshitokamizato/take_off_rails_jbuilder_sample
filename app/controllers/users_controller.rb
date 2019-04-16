@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    render json: @users, each_serializer: UserSerializer
   end
 
   def create
@@ -10,6 +11,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @users = User.find(params[:id])
+    render json: UserSerializer.new(@user)
   end
 
   def update
